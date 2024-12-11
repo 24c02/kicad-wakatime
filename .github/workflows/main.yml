@@ -14,12 +14,13 @@ jobs:
     - name: update rust...
       run: rustup update
     - name: build!
-      run: cargo build --verbose
+      working-directory: kicad-wakatime
+      run: cargo build --release
     - uses: actions/upload-artifact@v4
       with:
-        path: target/release/kicad-wakatime
+        path: kicad-wakatime/target/release/kicad-wakatime
     - name: ...release!
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: target/release/kicad-wakatime
+        files: kicad-wakatime/target/release/kicad-wakatime
